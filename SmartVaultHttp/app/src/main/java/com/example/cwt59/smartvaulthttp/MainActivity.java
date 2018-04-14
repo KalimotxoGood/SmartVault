@@ -1,6 +1,5 @@
 package com.example.cwt59.smartvaulthttp;
 
-import android.icu.text.StringSearch;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,46 +8,53 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
     EditText num1, num2;
-    Button btn;
+    Button onBtn, offBtn;
     String strURL="http://www.Google.com/meowman";
     String result ="";
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        num1 = findViewById(R.id.num1);
-        num2 = findViewById(R.id.num2);
-
-        btn = (Button) findViewById(R.id.btnAdd);
-
-        btn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                int i = Integer.parseInt(num1.getText().toString());
-                int j = Integer.parseInt(num2.getText().toString());
-                //int k = Integer.parseInt(num1.getText().toString());
-                strURL="http://www.Google.com";
-                new ControlGPIO().execute();
-
-
-            }
-        });
+        //btn = (Button) findViewById(R.id.btnAdd);
 
 
         new ControlGPIO().execute();
+    }
+
+
+// I could have used onClick listener but the code looks cleaner with designated function buttons rather than leaving multiple things in the onCreate
+    // which don't need to be
+    public void OnButton(View view){
+
+        EditText editText = findViewById(R.id.myNet);
+        String myNet = editText.getText().toString();
+        EditText editText1 = findViewById(R.id.dName);
+        String chosenDevice = editText1.getText().toString();
+        strURL = myNet + "/" + chosenDevice +"/on";
+
+        new ControlGPIO().execute();
+    }
+
+    public void OffButton(View view){
+        new ControlGPIO().execute();
+        EditText editText = findViewById(R.id.myNet);
+        String myNet = editText.getText().toString();
+        EditText editText1 = findViewById(R.id.dName);
+        String chosenDevice = editText1.getText().toString();
+        strURL = myNet + "/" + chosenDevice +"/off"; //make sure the address begins with "http://"
+
+        new ControlGPIO().execute();
+
     }
 
 
@@ -63,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s){
             super.onPostExecute(s);
-            Toast.makeText(MainActivity.this,"The output is   " + result, Toast.LENGTH_LONG).show();
+            //Toast.makeText(MainActivity.this,"The output is   " + result, Toast.LENGTH_LONG).show();
         }
 
         @Override
