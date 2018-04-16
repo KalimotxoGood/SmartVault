@@ -16,7 +16,7 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
 
     EditText num1, num2;
-    Button onBtn, offBtn; ///declare button objects for MainActivity. We link these buttons with the function below
+    Button onBtn, offBtn; ///declare button objects for MainActivity. We link these buttons with the functions below
     String strURL="http://www.Google.com/meowman"; // this http is never used.
     String result =""; // this is a global variable for setting the return string from the Flask Server. it is returned in the doInBackground() of 
                        // ControlGPIO class. if you want the return value, just use 'result'
