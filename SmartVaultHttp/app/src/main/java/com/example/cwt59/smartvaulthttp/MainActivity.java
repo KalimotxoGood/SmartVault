@@ -16,9 +16,9 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
 
     EditText num1, num2;
-    Button onBtn, offBtn;
-    String strURL="http://www.Google.com/meowman";
-    String result ="";
+    Button onBtn, offBtn; ///declare button objects for MainActivity. We link these buttons with the function below
+    String strURL="http://www.Google.com/meowman"; // this http is never used.
+    String result =""; //not used, but can be used if needed. Getting the return value from Flask server is shown in smartVaultConnect.
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +47,17 @@ public class MainActivity extends AppCompatActivity {
 
     public void OffButton(View view){
         new ControlGPIO().execute();
-        EditText editText = findViewById(R.id.myNet);
-        String myNet = editText.getText().toString();
-        EditText editText1 = findViewById(R.id.dName);
-        String chosenDevice = editText1.getText().toString();
-        strURL = myNet + "/" + chosenDevice +"/off"; //make sure the address begins with "http://"
+        EditText editText = findViewById(R.id.myNet); //declare an EditText object and set it to whatever the user inputs for the ip address (
+        String myNet = editText.getText().toString(); //stringify the EditText object and call it myNet (will be used for the final httpRequest address
+        EditText editText1 = findViewById(R.id.dName); // this allows the user to choose which gpio to toggle (ie turn off). For example, input "24" would be for gpio 24.
+        String chosenDevice = editText1.getText().toString(); // stringify editText1 (editTextONE!)
+        strURL = myNet + "/" + chosenDevice +"/off"; //Puts all the parts together to make it neat RESTFUL request(make sure the address from myNet begins with "http://")
 
-        new ControlGPIO().execute();
+        new ControlGPIO().execute(); //Calls the ControlGPIO class below. *Note: strURL is a global variable.
+                                    // So, strURL is used in ControlGPIO's HttpURLconnection. 
+                                    // When http://myNet/24/off is connected (called), it turns the gpio 24 pin off and
+                                    // returns whatever app.route("/24/off") returns (as shown in Web-server/app.py)
+        
 
     }
 
@@ -75,10 +79,10 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String...params){
             try {
-                URL url = new URL(strURL);
-                HttpURLConnection con = (HttpURLConnection)url.openConnection();
-                 con.setRequestMethod("GET");
-                 con.connect();
+                URL url = new URL(strURL); // create a new URL object with the create string from OffButton() or OnButton()
+                HttpURLConnection con = (HttpURLConnection)url.openConnection(); //opens the connection
+                 con.setRequestMethod("GET"); //Get method rather than post
+                 con.connect(); //Connect
 
                  BufferedReader bf = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
@@ -88,14 +92,14 @@ public class MainActivity extends AppCompatActivity {
 
 
             }
-            catch(Exception e)
+            catch(Exception e) //necessary catch exception for this AsyncTask to work
             {
                 System.out.println(e);
             }
             return result;
         }
 
-        public class UserInput
+        public class UserInput //function stub for other user inputs if needed in main.
         {
 
         }
