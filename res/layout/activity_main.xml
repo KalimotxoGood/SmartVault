@@ -27,7 +27,8 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="70dp"
         android:ems="6"
-        android:inputType="text" />
+        android:inputType="text"
+        android:textAlignment="center"/>
 
     <TextView
         android:id="@+id/usernameField"
@@ -61,7 +62,8 @@
         android:layout_alignBottom="@+id/passwordField"
         android:layout_alignStart="@+id/theUsername"
         android:ems="6"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textAlignment="center"/>
 
     <Button
         android:id="@+id/loginButton"
@@ -86,7 +88,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/usernameField"
-        android:layout_marginBottom="21dp"
+        android:layout_marginBottom="23dp"
         android:text="Remaining login attempts:"
         android:textColor="#000"
         android:textSize="15dp"
@@ -96,9 +98,8 @@
         android:id="@+id/leftovers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/attempts"
-        android:layout_marginEnd="91dp"
+        android:layout_alignBottom="@+id/attempts"
+        android:layout_alignEnd="@+id/theUsername"
         android:text="___"
         android:textColor="#000" />
 
