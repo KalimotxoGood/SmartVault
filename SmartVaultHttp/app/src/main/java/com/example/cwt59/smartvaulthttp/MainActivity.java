@@ -18,7 +18,8 @@ public class MainActivity extends AppCompatActivity {
     EditText num1, num2;
     Button onBtn, offBtn; ///declare button objects for MainActivity. We link these buttons with the function below
     String strURL="http://www.Google.com/meowman"; // this http is never used.
-    String result =""; //not used, but can be used if needed. Getting the return value from Flask server is shown in smartVaultConnect.
+    String result =""; // this is a global variable for setting the return string from the Flask Server. it is returned in the doInBackground() of 
+                       // ControlGPIO class. if you want the return value, just use 'result'
     @Override
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
                  String value = bf.readLine(); //this fetches the response from the server
                  System.out.println("result is " + value);
-                 result = value;
+                 result = value; sets the value of the server response to result (which is returned to the function outside this method)
 
 
             }
@@ -96,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
             {
                 System.out.println(e);
             }
-            return result;
+            return result; //returns 'result' as the server response! Get whatever you want as long as the server returns it. States? number of times opened?
         }
 
         public class UserInput //function stub for other user inputs if needed in main.
