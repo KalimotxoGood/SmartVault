@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
                  String value = bf.readLine(); //this fetches the response from the server
                  System.out.println("result is " + value);
-                 result = value; sets the value of the server response to result (which is returned to the function outside this method)
+                 result = value; //sets the value of the server response to result (which is returned to the function outside this method)
 
 
             }
