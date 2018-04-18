@@ -116,7 +116,7 @@ public class PasswordActivity extends AppCompatActivity {
                 System.out.println("result is " + value);
                 result = value;
 
-                MyTask 
+                MyTask
             }
             catch(Exception e)
             {
