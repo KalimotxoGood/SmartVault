@@ -1,7 +1,6 @@
 package com.example.jww193.smartvaultapp2;
 
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
@@ -9,12 +8,18 @@ import android.widget.Toast;
 import android.view.View;
 import android.os.Bundle;
 import android.os.AsyncTask;
-import android.util.Log;
+import android.net.Uri;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ResourceBundle;
+
 
 
 public class PasswordActivity extends AppCompatActivity {
@@ -26,8 +31,6 @@ public class PasswordActivity extends AppCompatActivity {
     String strURL = "http://www.Google.com";
     String result="";
 
-    private static final String TAG = "Testing: ";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +40,38 @@ public class PasswordActivity extends AppCompatActivity {
         new ControlGPIO().execute();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case R.id.item1:
+                Toast.makeText(this, "You have selected option 1:", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.item2:
+                Toast.makeText(this, "You have selected option 2:", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.item3:
+                Toast.makeText(this, "You have selected option 3:", Toast.LENGTH_SHORT).show();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+
+
+    // function that operates the on and off button on-clicks
     public void VaultOpen() {
         openVaultButton = (Button) findViewById(R.id.openVault);
         closeVaultButton = (Button) findViewById(R.id.closeVault);
@@ -58,11 +93,13 @@ public class PasswordActivity extends AppCompatActivity {
                 String chosenDevice = mDevice.getText().toString();
                 strURL = netAddress + "/" + chosenDevice + "/on";
 
-                if (vaultPassField.getText().toString().equals("OPEN")) {
-                    Toast.makeText(getApplicationContext(), strURL, Toast.LENGTH_SHORT).show();
-
+                if (vaultPassField.getText().toString().equals("OPEN"))
+                {
+                    Toast.makeText(getApplicationContext(), "The Vault has been opened!", Toast.LENGTH_SHORT).show();
                     new ControlGPIO().execute();
-                } else {
+                }
+                else
+                    {
                     Toast.makeText(getApplicationContext(), "Access denied", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -86,24 +123,23 @@ public class PasswordActivity extends AppCompatActivity {
         });
     }
 
+    // controls the GPIO pins
     public class ControlGPIO extends AsyncTask<String,String,String>
     {
         @Override
         protected void onPreExecute() {
-            Toast.makeText(getApplicationContext(), "hello preexecute", Toast.LENGTH_SHORT).show();
             super.onPreExecute();
         }
         @Override
-        protected void onPostExecute(String s)
-        {
+        protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            Toast.makeText(getApplicationContext(), "Post execute has been reached", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         protected String doInBackground(String...params){
             try
             {
-                Log.d(TAG, "Message");
                 Toast.makeText(getApplicationContext(), "hello url?", Toast.LENGTH_SHORT).show();
                 URL url = new URL(strURL);
                 HttpURLConnection con = (HttpURLConnection)url.openConnection();
@@ -116,7 +152,6 @@ public class PasswordActivity extends AppCompatActivity {
                 System.out.println("result is " + value);
                 result = value;
 
-                MyTask 
             }
             catch(Exception e)
             {
