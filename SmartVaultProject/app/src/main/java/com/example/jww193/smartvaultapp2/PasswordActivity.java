@@ -53,23 +53,21 @@ public class PasswordActivity extends AppCompatActivity {
         switch (item.getItemId())
         {
             case R.id.item1:
-                Toast.makeText(this, "You have selected option 1:", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "You have selected the Passphrase option:", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.item2:
-                Toast.makeText(this, "You have selected option 2:", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "You have selected the 6-Key option:", Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.item3:
-                Toast.makeText(this, "You have selected option 3:", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "You have selected the 8-Key option:", Toast.LENGTH_SHORT).show();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
-
 
     // function that operates the on and off button on-clicks
     public void VaultOpen() {

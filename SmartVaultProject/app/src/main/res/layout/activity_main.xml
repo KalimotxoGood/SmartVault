@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
@@ -13,48 +13,76 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="44dp"
         android:text="Please enter your username and password"
         android:textColor="#000"
-        android:textSize="35px"
-        android:textStyle="bold | italic" />
+        android:textSize="18sp"
+        android:textStyle="bold | italic"
+        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/theUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/usernameField"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="73dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/loginButton"
         android:ems="6"
         android:inputType="text"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/thePassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thePrompt"
+        app:layout_constraintVertical_bias="0.472" />
 
     <TextView
         android:id="@+id/usernameField"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="79dp"
-        android:layout_marginTop="214dp"
+        android:layout_height="23dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/passwordField"
+        android:layout_marginBottom="392dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toLeftOf="@+id/usernameField"
         android:text="Username:"
         android:textColor="#898686"
         android:textSize="35px"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/theUsername"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thePrompt"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/passwordField"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="23dp"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/usernameField"
+        android:layout_marginBottom="244dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_toLeftOf="@id/passwordField"
-        android:layout_marginBottom="250dp"
         android:text="Password:"
         android:textColor="#898686"
         android:textSize="35px"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/thePassword"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameField"
+        app:layout_constraintVertical_bias="0.722" />
 
     <EditText
         android:id="@+id/thePassword"
@@ -62,9 +90,13 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/passwordField"
         android:layout_alignStart="@+id/theUsername"
+        android:layout_marginBottom="76dp"
+        android:layout_marginEnd="88dp"
         android:ems="6"
         android:inputType="textPassword"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/loginButton"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/loginButton"
@@ -72,16 +104,23 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/usernameField"
-        android:layout_marginBottom="131dp"
-        android:text="Sign In" />
+        android:layout_marginBottom="16dp"
+        android:text="Sign In"
+        app:layout_constraintBottom_toTopOf="@+id/cancelButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <Button
         android:id="@+id/cancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/theUsername"
-        android:layout_alignTop="@+id/loginButton"
-        android:text="Cancel" />
+        android:layout_alignRight="@+id/loginButton"
+        android:layout_marginBottom="88dp"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/attempts"
@@ -89,11 +128,15 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/usernameField"
-        android:layout_marginBottom="23dp"
+        android:layout_marginBottom="16dp"
         android:text="Remaining login attempts:"
         android:textColor="#000"
         android:textSize="15dp"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.373"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
         android:id="@+id/leftovers"
@@ -101,7 +144,13 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/attempts"
         android:layout_alignEnd="@+id/theUsername"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
         android:text="___"
-        android:textColor="#000" />
+        android:textColor="#000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.74"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

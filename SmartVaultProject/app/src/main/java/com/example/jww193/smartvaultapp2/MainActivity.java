@@ -9,6 +9,16 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.icu.text.StringSearch;
+import android.os.AsyncTask;
+
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.io.BufferedReader;
+import java.io.BufferedOutputStream;
+import java.io.BufferedInputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 
 public class MainActivity extends AppCompatActivity {
     Button loginButton, cancelButton;
@@ -16,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     TextView theAttempts, theLeftovers;
     int counter = 3;
     String the_user;
+    String strURL="http://192.168.0.106:5000/23/on";
+    String result="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +79,46 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    public class ControlGPIO extends AsyncTask<String,String,String>
+    {
+        @Override
+        protected  void onPreExecute(){
+            super.onPreExecute();
+        }
+
+        @Override protected  void onPostExecute(String s)
+        {
+            super.onPostExecute(s);
+        }
+
+        @Override
+        protected String doInBackground(String...params) {
+            try {
+                URL url = new URL(strURL);
+                HttpURLConnection con = (HttpURLConnection)url.openConnection();
+                con.setRequestMethod("GET");
+                con.connect();
+
+                BufferedReader bf = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+                String value = bf.readLine();
+                System.out.println("result is " + value);
+                result = value;
+            }
+
+            catch(Exception e)
+            {
+                System.out.println(e);
+            }
+            return result;
+        }
+
+        public class UserInput
+        {
+            // nothing in here (yet?)
+        }
     }
 }
 
