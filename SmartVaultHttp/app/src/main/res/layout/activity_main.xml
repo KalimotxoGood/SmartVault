@@ -6,54 +6,153 @@
     android:layout_height="match_parent"
     tools:context="com.example.cwt59.smartvaulthttp.MainActivity">
 
-    <Button
-        android:id="@+id/onBtn"
+    <TextView
+        android:id="@+id/thePrompt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
-        android:layout_marginStart="68dp"
-        android:onClick="OnButton"
-        android:text="On"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/offBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="76dp"
-        android:layout_marginEnd="48dp"
-        android:onClick="OffButton"
-        android:text="Off"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <EditText
-        android:id="@+id/myNet"
-        android:layout_width="253dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="http://192.168.0.100:5000"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="132dp"
+        android:text="Please enter your username and password"
+        android:textColor="#000"
+        android:textSize="14sp"
+        app:layout_constraintHorizontal_bias="0.741"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/dName"
-        android:layout_width="254dp"
+        android:id="@+id/theUsername"
+        android:layout_width="95dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="64dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="23"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:layout_alignBottom="@+id/usernameField"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="48dp"
+        android:layout_toEndOf="@+id/loginButton"
+        android:ems="6"
+        android:inputType="text"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/thePassword"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/usernameField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="276dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginStart="8dp"
+        android:text="Username:"
+        android:textColor="#898686"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/theUsername"
+        app:layout_constraintHorizontal_bias="0.381"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/passwordField"
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/usernameField"
+        android:layout_marginBottom="208dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_toLeftOf="@id/passwordField"
+        android:text="Password:"
+        android:textColor="#898686"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/thePassword"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myNet" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameField"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/thePassword"
+        android:layout_width="96dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/passwordField"
+        android:layout_alignStart="@+id/theUsername"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="48dp"
+        android:ems="6"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/loginButton"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/usernameField"
+        android:layout_marginBottom="12dp"
+        android:onClick="LoginButton"
+        android:text="Sign In"
+        app:layout_constraintBottom_toTopOf="@+id/cancelButton"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/theUsername"
+        android:layout_alignTop="@+id/loginButton"
+        android:layout_marginBottom="32dp"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/attempts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/usernameField"
+        android:layout_marginBottom="156dp"
+        android:text="Remaining login attempts:"
+        android:textColor="#000"
+        android:textSize="15dp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.644"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/leftovers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/attempts"
+        android:layout_alignEnd="@+id/theUsername"
+        android:layout_marginBottom="156dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="36dp"
+        android:text="___"
+        android:textColor="#000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/attempts" />
+
+    <Button
+        android:id="@+id/googleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:onClick="GoogleButton"
+        android:text='ButtoniReturn"Hi"'
+        app:layout_constraintTop_toBottomOf="@+id/thePrompt"
+        tools:layout_editor_absoluteX="171dp" />
 
 </android.support.constraint.ConstraintLayout>

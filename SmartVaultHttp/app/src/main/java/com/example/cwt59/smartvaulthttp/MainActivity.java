@@ -1,66 +1,64 @@
 package com.example.cwt59.smartvaulthttp;
 
+import android.content.Intent;
+import android.icu.text.StringSearch;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-import android.util.Log;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText num1, num2;
-    Button onBtn, offBtn; ///declare button objects for MainActivity. We link these buttons with the functions below
-    String strURL="http://www.Google.com/meowman"; // this http is never used.
-    String result =""; // this is a global variable for setting the return string from the Flask Server. it is returned in the doInBackground() of 
-                       // ControlGPIO class. if you want the return value, just use 'result'
+    EditText userField, passField;
+    TextView theAttempts, theLeftovers;
+    int counter = 3;
+    String the_user;
+    static String strURL="http://192.168.0.106:5000/23/on";
+    static String result ="";
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //btn = (Button) findViewById(R.id.btnAdd);
-
+        userField = (EditText) findViewById(R.id.theUsername);
+        passField = (EditText) findViewById(R.id.thePassword);
+        theAttempts = (TextView) findViewById(R.id.attempts);
+        theLeftovers = (TextView) findViewById(R.id.leftovers);
 
         //new ControlGPIO().execute();
     }
 
+    public void LoginButton(View view){
+        if (userField.getText().toString().equals("admin") &&
+                passField.getText().toString().equals("password")) {
+            Toast.makeText(getApplicationContext(), "Redirecting...", Toast.LENGTH_SHORT).show();
+            the_user = userField.getText().toString();
+            Intent i = new Intent(this, PasswordActivity.class);
+            i.putExtra("value", the_user);
+            startActivity(i);
+        }
 
-// I could have used onClick listener but the code looks cleaner with designated function buttons rather than leaving multiple things in the onCreate
-    // which don't need to be
-    public void OnButton(View view){
+    };
 
-        EditText editText = findViewById(R.id.myNet);
-        String myNet = editText.getText().toString();
-        EditText editText1 = findViewById(R.id.dName);
-        String chosenDevice = editText1.getText().toString();
-        strURL = myNet + "/" + chosenDevice +"/on";
+    public void GoogleButton(View view){
 
+        strURL = "http://192.168.0.106:5000/24/on";
         new ControlGPIO().execute();
     }
 
-    public void OffButton(View view){
-       // new ControlGPIO().execute();
-        EditText editText = findViewById(R.id.myNet); //declare an EditText object and set it to whatever the user inputs for the ip address (
-        String myNet = editText.getText().toString(); //stringify the EditText object and call it myNet (will be used for the final httpRequest address
-        EditText editText1 = findViewById(R.id.dName); // this allows the user to choose which gpio to toggle (ie turn off). For example, input "24" would be for gpio 24.
-        String chosenDevice = editText1.getText().toString(); // stringify editText1 (editTextONE!)
-        strURL = myNet + "/" + chosenDevice +"/off"; //Puts all the parts together to make it neat RESTFUL request(make sure the address from myNet begins with "http://")
 
-        new ControlGPIO().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);; //Calls the ControlGPIO class below. *Note: strURL is a global variable.
-                                    // So, strURL is used in ControlGPIO's HttpURLconnection. 
-                                    // When http://myNet/24/off is connected (called), it turns the gpio 24 pin off and
-                                    // returns whatever app.route("/24/off") returns (as shown in Web-server/app.py)
-        Toast.makeText(getApplicationContext(), "hello from function", Toast.LENGTH_SHORT).show();
-
-    }
 
 
 
@@ -74,37 +72,36 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s){
             super.onPostExecute(s);
-            Toast.makeText(MainActivity.this,"The output is   " + result, Toast.LENGTH_LONG).show();
+           // Toast.makeText(MainActivity.this,"The output is   " + result, Toast.LENGTH_LONG).show();
         }
 
         @Override
         protected String doInBackground(String...params){
-           // Toast.makeText(getApplicationContext(), "hello from before Try in Background", Toast.LENGTH_SHORT).show();
             try {
+                URL url = new URL(strURL);
+                HttpURLConnection con = (HttpURLConnection)url.openConnection();
+                con.setRequestMethod("GET");
+                con.connect();
 
-                URL url = new URL(strURL); // create a new URL object with the create string from OffButton() or OnButton()
-                Toast.makeText(getApplicationContext(), "hello from Background", Toast.LENGTH_SHORT).show();
-                HttpURLConnection con = (HttpURLConnection) url.openConnection(); //opens the connection
-                con.setRequestMethod("GET"); //Get method rather than post
-                con.connect(); //Connect
+                BufferedReader bf = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
-                 BufferedReader bf = new BufferedReader(new InputStreamReader(con.getInputStream()));
-
-                 String value = bf.readLine(); //this fetches the response from the server
-                 System.out.println("result is " + value);
-                 result = value; //sets the value of the server response to result (which is returned to the function outside this method)
+                String value = bf.readLine(); //this fetches the response from the server
+                System.out.println("result is " + value);
+                result = value;
 
 
             }
-            catch(Exception e) //necessary catch exception for this AsyncTask to work
+            catch(Exception e)
             {
                 System.out.println(e);
-                //Toast.makeText(getApplicationContext(), "hello from exception", Toast.LENGTH_SHORT).show();
             }
-            //Toast.makeText(getApplicationContext(), "hello from before return", Toast.LENGTH_SHORT).show();
-            return result; //returns 'result' as the server response! Get whatever you want as long as the server returns it. States? number of times opened?
+            return result;
+        }
+
+        public class UserInput
+        {
+
         }
     }
 }
-
 
