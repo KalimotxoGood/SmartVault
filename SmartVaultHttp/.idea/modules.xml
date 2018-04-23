@@ -4,7 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SmartVaultHttp.iml" filepath="$PROJECT_DIR$/SmartVaultHttp.iml" />
       <module fileurl="file://C:\Users\cwt59\Desktop\SmartVault\SmartVaultHttp\SmartVaultHttp.iml" filepath="C:\Users\cwt59\Desktop\SmartVault\SmartVaultHttp\SmartVaultHttp.iml" />
+      <module fileurl="file://C:\Users\Licensed User\Desktop\SmartVault\SmartVaultHttp\SmartVaultHttp.iml" filepath="C:\Users\Licensed User\Desktop\SmartVault\SmartVaultHttp\SmartVaultHttp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Licensed User\Desktop\SmartVault\SmartVaultHttp\app\app.iml" filepath="C:\Users\Licensed User\Desktop\SmartVault\SmartVaultHttp\app\app.iml" />
       <module fileurl="file://C:\Users\cwt59\Desktop\SmartVault\SmartVaultHttp\app\app.iml" filepath="C:\Users\cwt59\Desktop\SmartVault\SmartVaultHttp\app\app.iml" />
     </modules>
   </component>
