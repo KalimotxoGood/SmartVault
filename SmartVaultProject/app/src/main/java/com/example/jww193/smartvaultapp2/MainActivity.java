@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     Toast.makeText(getApplicationContext(), "Incorrect Credentials", Toast.LENGTH_SHORT).show();
                     theLeftovers.setVisibility(View.VISIBLE);
-                    theLeftovers.setBackgroundColor(Color.RED);
+                    theLeftovers.setBackgroundColor(Color.WHITE);
                     counter--;
                     theLeftovers.setText(Integer.toString(counter));
 

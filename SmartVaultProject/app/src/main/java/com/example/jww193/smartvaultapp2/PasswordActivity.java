@@ -43,7 +43,7 @@ public class PasswordActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_items, menu);
         return true;
     }
 
@@ -131,7 +131,6 @@ public class PasswordActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Toast.makeText(getApplicationContext(), "Post execute has been reached", Toast.LENGTH_SHORT).show();
         }
 
         @Override
