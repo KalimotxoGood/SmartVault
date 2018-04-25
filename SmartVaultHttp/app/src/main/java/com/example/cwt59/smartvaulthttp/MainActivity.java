@@ -54,8 +54,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void GoogleButton(View view){
 
-        strURL = "http://192.168.0.106:5000/24/on";
+        strURL = "http://google.com";
         new ControlGPIO().execute();
+        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
     }
 
 
