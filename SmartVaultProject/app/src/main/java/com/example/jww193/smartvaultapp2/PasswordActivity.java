@@ -110,10 +110,13 @@ public class PasswordActivity extends AppCompatActivity {
         closeVaultButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new ControlGPIO().execute();
+
+                
                 EditText theNet = findViewById(R.id.myNet);
                 String netAddress = theNet.getText().toString();
-                String chosenDevice = userText.getText().toString();
+                EditText mDevice = findViewById(R.id.dName);
+                String chosenDevice = mDevice.getText().toString();
+
                 strURL = netAddress + "/" + chosenDevice + "/off";
                 Toast.makeText(getApplicationContext(), "Vault has been closed!", Toast.LENGTH_SHORT).show();
 
