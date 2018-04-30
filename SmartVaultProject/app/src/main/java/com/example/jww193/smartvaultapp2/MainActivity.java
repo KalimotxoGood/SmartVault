@@ -20,6 +20,8 @@ import java.io.BufferedInputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 
+// Up to date version as of 4/29/2018
+
 public class MainActivity extends AppCompatActivity {
     Button loginButton, cancelButton;
     EditText userField, passField;
@@ -33,17 +35,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        LoginButton();
-    }
-    public void LoginButton(){
-
         loginButton = (Button) findViewById(R.id.loginButton);
         cancelButton = (Button) findViewById(R.id.cancelButton);
         userField = (EditText) findViewById(R.id.theUsername);
         passField = (EditText) findViewById(R.id.thePassword);
         theAttempts = (TextView) findViewById(R.id.attempts);
         theLeftovers = (TextView) findViewById(R.id.leftovers);
+        LoginButton();
+    }
 
+    public void LoginButton(){
         // Login listener, when clicked, checks for username and password
         // if correct, displays a toast showing redirection to the next activity
         // storing the user value with it
@@ -79,6 +80,13 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+    };
+
+    public void GoogleButton(View view)
+    {
+        strURL = "http://google.com";
+        new ControlGPIO().execute();
+        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
     }
 
     public class ControlGPIO extends AsyncTask<String,String,String>
