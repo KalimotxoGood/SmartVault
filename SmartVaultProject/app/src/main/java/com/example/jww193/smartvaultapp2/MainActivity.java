@@ -1,5 +1,8 @@
 package com.example.jww193.smartvaultapp2;
 
+import android.net.Uri;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -20,7 +23,7 @@ import java.io.BufferedInputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 
-// Up to date version as of 4/29/2018
+/* Lastest version as of 5/10/2018 */
 
 public class MainActivity extends AppCompatActivity {
     Button loginButton, cancelButton;
@@ -28,23 +31,25 @@ public class MainActivity extends AppCompatActivity {
     TextView theAttempts, theLeftovers;
     int counter = 3;
     String the_user;
-    String strURL="http://192.168.0.106:5000/23/on";
+    String strURL="http://172.20.10.2:5000/23/on";
     String result="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        LoginButton();
+    }
+
+    public void LoginButton(){
+
         loginButton = (Button) findViewById(R.id.loginButton);
         cancelButton = (Button) findViewById(R.id.cancelButton);
         userField = (EditText) findViewById(R.id.theUsername);
         passField = (EditText) findViewById(R.id.thePassword);
         theAttempts = (TextView) findViewById(R.id.attempts);
         theLeftovers = (TextView) findViewById(R.id.leftovers);
-        LoginButton();
-    }
 
-    public void LoginButton(){
         // Login listener, when clicked, checks for username and password
         // if correct, displays a toast showing redirection to the next activity
         // storing the user value with it
@@ -55,6 +60,9 @@ public class MainActivity extends AppCompatActivity {
                         passField.getText().toString().equals("password")) {
                     Toast.makeText(getApplicationContext(), "Redirecting...", Toast.LENGTH_SHORT).show();
                     the_user = userField.getText().toString();
+
+                    // NOTE: changing the Intent class to PasswordActivities will bring more activities
+                    //       but it is uncertain whether they communicate with the Raspberry Pi yet
                     Intent i = new Intent(v.getContext(), PasswordActivity.class);
                     i.putExtra("value", the_user);
                     startActivity(i);
@@ -80,13 +88,6 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
-    };
-
-    public void GoogleButton(View view)
-    {
-        strURL = "http://google.com";
-        new ControlGPIO().execute();
-        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
     }
 
     public class ControlGPIO extends AsyncTask<String,String,String>
@@ -125,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
 
         public class UserInput
         {
-            // nothing in here (yet?)
         }
     }
 }

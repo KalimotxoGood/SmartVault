@@ -1,74 +1,61 @@
 package com.example.jww193.smartvaultapp2;
 
-import android.os.AsyncTask;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
+import android.view.View;
+import android.os.Bundle;
+import android.os.AsyncTask;
+import android.net.Uri;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ResourceBundle;
+import android.util.Log;
+
 
 public class PasswordActivity extends AppCompatActivity {
+    Button openVaultButton;
+    Button closeVaultButton;
     String valFromMain;
     EditText vaultPassField;
     TextView userText;
-    static String strURL = "";
-    static String result = "";
-    Button openVaultButton;
-    Button closeVaultButton;
+    String strURL = "";
+    String result = "";
+
+    private static final String TAG = "PasswordActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.password_main);
-        userText = (TextView) findViewById(R.id.welcomeUser);
+
+        userText = (TextView)findViewById(R.id.welcomeUser);
         valFromMain = getIntent().getExtras().getString("value");
-        userText.setText("Welcome " + valFromMain + "!");
+        userText.setText("welcome " + valFromMain + "!");
         vaultPassField = (EditText) findViewById(R.id.vaultPassword);
         VaultOpen();
     }
-
-    public void GoogleButton(View view){
-        strURL = "http://192.168.0.106:5000/23/on";
+    public void GoogleButton(View view)
+    {
+        strURL = "http://172.168.0.106:5000/23/on";
         new ControlGPIO().execute();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        getMenuInflater().inflate(R.menu.menu_items, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
-            case R.id.item1:
-                Toast.makeText(this, "You have selected the Passphrase option:", Toast.LENGTH_SHORT).show();
-                return true;
-
-            case R.id.item2:
-                Toast.makeText(this, "You have selected the 6-Key option:", Toast.LENGTH_SHORT).show();
-                return true;
-
-            case R.id.item3:
-                Toast.makeText(this, "You have selected the 8-Key option:", Toast.LENGTH_SHORT).show();
-                return true;
-
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
     // function that operates the on and off button on-clicks
     public void VaultOpen() {
@@ -110,10 +97,11 @@ public class PasswordActivity extends AppCompatActivity {
         closeVaultButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new ControlGPIO().execute();
+                //new ControlGPIO().execute();
                 EditText theNet = findViewById(R.id.myNet);
                 String netAddress = theNet.getText().toString();
-                String chosenDevice = userText.getText().toString();
+                EditText mDevice = findViewById(R.id.dName);
+                String chosenDevice = mDevice.getText().toString();
                 strURL = netAddress + "/" + chosenDevice + "/off";
                 Toast.makeText(getApplicationContext(), "Vault has been closed!", Toast.LENGTH_SHORT).show();
 
@@ -122,8 +110,9 @@ public class PasswordActivity extends AppCompatActivity {
         });
     }
 
-    // function for controlling the GPIO pins of the RaspberryPi
-    public class ControlGPIO extends AsyncTask<String,String,String> {
+    // controls the GPIO pins
+    public class ControlGPIO extends AsyncTask<String,String,String>
+    {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -133,21 +122,26 @@ public class PasswordActivity extends AppCompatActivity {
             super.onPostExecute(s);
         }
 
-        // operates the processes in the background
+
         @Override
-        protected String doInBackground(String... params) {
-            try {
+        protected String doInBackground(String...params){
+            try
+            {
+                //Toast.makeText(getApplicationContext(), "hello url?", Toast.LENGTH_SHORT).show();
                 URL url = new URL(strURL);
-                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                HttpURLConnection con = (HttpURLConnection)url.openConnection();
                 con.setRequestMethod("GET");
                 con.connect();
-
+                //Toast.makeText(getApplicationContext(), "hello after URL", Toast.LENGTH_SHORT).show();
                 BufferedReader bf = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
                 String value = bf.readLine();
                 System.out.println("result is " + value);
                 result = value;
-            } catch (Exception e) {
+
+            }
+            catch(Exception e)
+            {
                 System.out.println(e);
             }
             return result;
@@ -155,6 +149,8 @@ public class PasswordActivity extends AppCompatActivity {
 
         public class UserInput
         {
+
         }
     }
 }
+

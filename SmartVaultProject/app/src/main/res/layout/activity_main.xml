@@ -39,7 +39,7 @@
         app:layout_constraintBottom_toTopOf="@+id/thePassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/thePrompt"
-        app:layout_constraintVertical_bias="0.514" />
+        app:layout_constraintVertical_bias="0.626" />
 
     <TextView
         android:id="@+id/usernameField"
@@ -47,17 +47,21 @@
         android:layout_height="23dp"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/passwordField"
-        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="392dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_toLeftOf="@+id/usernameField"
         android:text="Username:"
         android:textColor="#ffffff"
         android:textSize="16dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/theUsername"
-        app:layout_constraintHorizontal_bias="0.698"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="161dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/passwordField"
@@ -120,16 +124,6 @@
         app:layout_constraintHorizontal_bias="0.562"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
-
-    <Button
-        android:id="@+id/googleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="292dp"
-        android:onClick="GoogleButton"
-        android:text='ButtonReturn"Hi"'
-        app:layout_constraintTop_toBottomOf="@+id/thePrompt"
-        tools:layout_editor_absoluteX="0dp" />
 
     <TextView
         android:id="@+id/attempts"
