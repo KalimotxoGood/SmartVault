@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/darkbluevaultbackground"
+    tools:context="com.example.jww193.smartvaultapp2.PasswordActivities">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/idBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Get Wifi Info"
+            android:onClick="getWiFiInformation"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/idTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:textSize="20sp"/>
+    </LinearLayout>
+    </ScrollView>

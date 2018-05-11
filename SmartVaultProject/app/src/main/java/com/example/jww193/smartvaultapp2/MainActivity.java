@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // NOTE: changing the Intent class to PasswordActivities will bring more activities
                     //       but it is uncertain whether they communicate with the Raspberry Pi yet
-                    Intent i = new Intent(v.getContext(), PasswordActivity.class);
+                    Intent i = new Intent(v.getContext(), PasswordActivities.class);
                     i.putExtra("value", the_user);
                     startActivity(i);
                 }
